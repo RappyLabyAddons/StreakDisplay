@@ -1,9 +1,41 @@
 {
   "streakdisplay": {
     "settings": {
+      "header": {
+        "tag": {
+          "name": "Tag"
+        },
+        "streaks": {
+          "name": "Streaks"
+        },
+        "cache": {
+          "name": "Cache"
+        }
+      },
       "enabled": {
         "name": "Enabled"
+      },
+      "showBackground": {
+        "name": "Show background"
+      },
+      "size": {
+        "name": "Size"
+      },
+      "hideZeroStreaks": {
+        "name": "Hide streaks which are 0"
+      },
+      "hideHiddenStreaks": {
+        "name": "Hide hidden streaks",
+        "description": "If this option is disabled it only shows that the streak is hidden."
+      },
+      "clearCache": {
+        "name": "Clear cache",
+        "text": "Clear",
+        "description": "This does not refetch the streak value on the server-side. It just refetches all streaks from the API."
       }
+    },
+    "nametag": {
+      "hiddenStreak": "Hidden"
     }
   }
 }
