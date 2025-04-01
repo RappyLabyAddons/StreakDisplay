@@ -15,7 +15,7 @@ labyMod {
         namespace = "streakdisplay"
         displayName = "StreakDisplay"
         author = "RappyTV"
-        description = "..."
+        description = "See other players' LabyMod login streaks!"
         minecraftVersion = "*"
         version = rootProject.version.toString()
     }

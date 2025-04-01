@@ -15,11 +15,11 @@
       "enabled": {
         "name": "Enabled"
       },
-      "showBackground": {
-        "name": "Show background"
-      },
       "size": {
         "name": "Size"
+      },
+      "showBackground": {
+        "name": "Show background"
       },
       "hideZeroStreaks": {
         "name": "Hide streaks which are 0"
