@@ -22,16 +22,16 @@
         "name": "Show background"
       },
       "hideZeroStreaks": {
-        "name": "Hide streaks which are 0"
+        "name": "Hide 0-day streaks"
       },
       "hideHiddenStreaks": {
-        "name": "Hide hidden streaks",
-        "description": "If this option is disabled it only shows that the streak is hidden."
+        "name": "Hide private streaks",
+        "description": "If disabled, it will indicate that the streak is hidden instead of removing it."
       },
       "clearCache": {
-        "name": "Clear cache",
-        "text": "Clear",
-        "description": "This does not refetch the streak value on the server-side. It just refetches all streaks from the API."
+        "name": "Refresh streak data",
+        "text": "Refresh",
+        "description": "This only updates streaks from the API and does not request new data from the laby.net."
       }
     },
     "nametag": {
