@@ -32,19 +32,25 @@ public class DefaultStreakApiController implements StreakApiController {
         .async()
         .execute(response -> {
           if (response.hasException() || response.getStatusCode() != 200) {
-            this.cache.put(uuid, null);
-            this.resolving.remove(uuid);
+            this.cacheFailure(uuid);
             return;
           }
           JsonObject body = response.get().getAsJsonObject();
           if (!body.has("streak") || !body.get("streak").isJsonPrimitive()) {
-            this.cache.put(uuid, null);
-            this.resolving.remove(uuid);
+            this.cacheFailure(uuid);
             return;
           }
-          this.cache.put(uuid, body.get("streak").getAsInt());
-          this.resolving.remove(uuid);
+          this.cacheStreak(uuid, body.get("streak").getAsInt());
         });
+  }
+
+  private void cacheFailure(UUID uuid) {
+    this.cacheStreak(uuid, null);
+  }
+
+  private void cacheStreak(UUID uuid, Integer value) {
+    this.cache.put(uuid, value);
+    this.resolving.remove(uuid);
   }
 
   @Override
