@@ -4,6 +4,7 @@ import com.rappytv.streakdisplay.StreakDisplayAddon;
 import com.rappytv.streakdisplay.StreakDisplayConfig;
 import com.rappytv.streakdisplay.api.StreakApiController;
 import java.util.UUID;
+import com.rappytv.streakdisplay.api.Textures;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -13,15 +14,11 @@ import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.render.RenderPipeline;
 import net.labymod.api.client.render.font.RenderableComponent;
 import net.labymod.api.client.render.matrix.Stack;
-import net.labymod.api.client.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 public class StreakNameTag extends NameTag {
 
-  private static final Icon STREAK = Icon.texture(ResourceLocation.create(
-      "streakdisplay",
-      "textures/streak.png"
-  ));
+  private static final Icon STREAK = Icon.texture(Textures.STREAK);
   private final StreakDisplayConfig config;
   private final StreakApiController controller;
 

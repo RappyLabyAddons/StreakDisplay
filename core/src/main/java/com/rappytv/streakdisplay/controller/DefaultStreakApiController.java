@@ -16,6 +16,7 @@ import net.labymod.api.util.io.web.request.Request;
 @Implements(StreakApiController.class)
 public class DefaultStreakApiController implements StreakApiController {
 
+  private static final String STREAK_ENDPOINT = "https://streaks.rappytv.com/streaks/%s";
   private final Map<UUID, Integer> cache = new HashMap<>();
   private final Set<UUID> resolving = new HashSet<>();
 
@@ -26,24 +27,30 @@ public class DefaultStreakApiController implements StreakApiController {
     }
     this.resolving.add(uuid);
     Request.ofGson(JsonElement.class)
-        .url("https://streaks.rappytv.com/streaks/" + uuid.toString())
+        .url(String.format(STREAK_ENDPOINT, uuid))
         .handleErrorStream()
         .async()
         .execute(response -> {
           if (response.hasException() || response.getStatusCode() != 200) {
-            this.cache.put(uuid, null);
-            this.resolving.remove(uuid);
+            this.cacheFailure(uuid);
             return;
           }
           JsonObject body = response.get().getAsJsonObject();
           if (!body.has("streak") || !body.get("streak").isJsonPrimitive()) {
-            this.cache.put(uuid, null);
-            this.resolving.remove(uuid);
+            this.cacheFailure(uuid);
             return;
           }
-          this.cache.put(uuid, body.get("streak").getAsInt());
-          this.resolving.remove(uuid);
+          this.cacheStreak(uuid, body.get("streak").getAsInt());
         });
+  }
+
+  private void cacheFailure(UUID uuid) {
+    this.cacheStreak(uuid, null);
+  }
+
+  private void cacheStreak(UUID uuid, Integer value) {
+    this.cache.put(uuid, value);
+    this.resolving.remove(uuid);
   }
 
   @Override

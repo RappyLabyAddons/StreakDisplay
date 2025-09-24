@@ -1,5 +1,7 @@
 # StreakDisplay
 
+With this addon you can see the streaks of other players below their name in a separate nametag. [This API](https://github.com/RappyTV/StreakAPI) is used to retrieve the streak data.
+
 ### 📦 Installation
 
 1. Press `Win` + `R`
