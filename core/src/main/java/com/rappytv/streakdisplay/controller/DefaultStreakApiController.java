@@ -16,6 +16,7 @@ import net.labymod.api.util.io.web.request.Request;
 @Implements(StreakApiController.class)
 public class DefaultStreakApiController implements StreakApiController {
 
+  private static final String STREAK_ENDPOINT = "https://streaks.rappytv.com/streaks/%s";
   private final Map<UUID, Integer> cache = new HashMap<>();
   private final Set<UUID> resolving = new HashSet<>();
 
@@ -26,7 +27,7 @@ public class DefaultStreakApiController implements StreakApiController {
     }
     this.resolving.add(uuid);
     Request.ofGson(JsonElement.class)
-        .url("https://streaks.rappytv.com/streaks/" + uuid.toString())
+        .url(String.format(STREAK_ENDPOINT, uuid))
         .handleErrorStream()
         .async()
         .execute(response -> {
