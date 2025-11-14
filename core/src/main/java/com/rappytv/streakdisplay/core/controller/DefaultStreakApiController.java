@@ -64,6 +64,11 @@ public class DefaultStreakApiController implements StreakApiController {
   }
 
   @Override
+  public void remove(UUID uuid) {
+    this.cache.remove(uuid);
+  }
+
+  @Override
   public void clear() {
     this.cache.clear();
   }

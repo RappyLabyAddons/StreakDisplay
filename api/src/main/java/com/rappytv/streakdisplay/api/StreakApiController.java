@@ -12,6 +12,8 @@ public interface StreakApiController {
 
   Integer get(UUID uuid);
 
+  void remove(UUID uuid);
+
   void clear();
 
 }
