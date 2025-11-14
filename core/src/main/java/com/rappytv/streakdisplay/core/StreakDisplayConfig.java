@@ -40,7 +40,7 @@ public class StreakDisplayConfig extends AddonConfig {
   @MethodOrder(after = "hideHiddenStreaks")
   @ButtonSetting
   public void clearCache() {
-    StreakDisplayAddon.references().streakApiController().clear();
+    StreakDisplayAddon.cacheController().clear();
   }
 
   @Override
