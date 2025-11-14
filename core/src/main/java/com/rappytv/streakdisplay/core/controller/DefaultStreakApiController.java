@@ -1,4 +1,4 @@
-package com.rappytv.streakdisplay.controller;
+package com.rappytv.streakdisplay.core.controller;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

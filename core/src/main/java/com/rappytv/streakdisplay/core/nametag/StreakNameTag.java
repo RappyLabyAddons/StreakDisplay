@@ -1,10 +1,10 @@
-package com.rappytv.streakdisplay.nametag;
+package com.rappytv.streakdisplay.core.nametag;
 
-import com.rappytv.streakdisplay.StreakDisplayAddon;
-import com.rappytv.streakdisplay.StreakDisplayConfig;
 import com.rappytv.streakdisplay.api.StreakApiController;
+import com.rappytv.streakdisplay.api.StreakDisplayTextures;
+import com.rappytv.streakdisplay.core.StreakDisplayAddon;
+import com.rappytv.streakdisplay.core.StreakDisplayConfig;
 import java.util.UUID;
-import com.rappytv.streakdisplay.api.Textures;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class StreakNameTag extends NameTag {
 
-  private static final Icon STREAK = Icon.texture(Textures.STREAK);
+  private static final Icon STREAK = Icon.texture(StreakDisplayTextures.STREAK);
   private final StreakDisplayConfig config;
   private final StreakApiController controller;
 

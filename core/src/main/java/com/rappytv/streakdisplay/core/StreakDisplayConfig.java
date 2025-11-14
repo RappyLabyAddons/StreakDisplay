@@ -1,4 +1,4 @@
-package com.rappytv.streakdisplay;
+package com.rappytv.streakdisplay.core;
 
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;

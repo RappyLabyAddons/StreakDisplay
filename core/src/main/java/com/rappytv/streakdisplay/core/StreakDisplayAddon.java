@@ -1,7 +1,7 @@
-package com.rappytv.streakdisplay;
+package com.rappytv.streakdisplay.core;
 
 import com.rappytv.streakdisplay.api.generated.ReferenceStorage;
-import com.rappytv.streakdisplay.nametag.StreakNameTag;
+import com.rappytv.streakdisplay.core.nametag.StreakNameTag;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.models.addon.annotation.AddonMain;
