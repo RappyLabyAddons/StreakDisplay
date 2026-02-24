@@ -1,7 +1,9 @@
-package com.rappytv.streakdisplay;
+package com.rappytv.streakdisplay.core;
 
+import com.rappytv.streakdisplay.api.StreakCacheController;
 import com.rappytv.streakdisplay.api.generated.ReferenceStorage;
-import com.rappytv.streakdisplay.nametag.StreakNameTag;
+import com.rappytv.streakdisplay.core.listener.PlayerInfoListener;
+import com.rappytv.streakdisplay.core.ui.nametag.StreakNameTag;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.models.addon.annotation.AddonMain;
@@ -9,14 +11,14 @@ import net.labymod.api.models.addon.annotation.AddonMain;
 @AddonMain
 public class StreakDisplayAddon extends LabyAddon<StreakDisplayConfig> {
 
-  private static StreakDisplayAddon INSTANCE;
+  private static StreakDisplayAddon instance;
 
   @Override
   protected void enable() {
-    INSTANCE = this;
+    instance = this;
 
     this.registerSettingCategory();
-
+    this.registerListener(new PlayerInfoListener());
     this.labyAPI().tagRegistry().register(
         "streakdisplay",
         PositionType.BELOW_NAME,
@@ -29,7 +31,7 @@ public class StreakDisplayAddon extends LabyAddon<StreakDisplayConfig> {
     return StreakDisplayConfig.class;
   }
 
-  public static ReferenceStorage references() {
-    return INSTANCE.referenceStorageAccessor();
+  public static StreakCacheController cacheController() {
+    return ((ReferenceStorage) instance.referenceStorageAccessor()).streakCacheController();
   }
 }

@@ -1,4 +1,4 @@
-package com.rappytv.streakdisplay;
+package com.rappytv.streakdisplay.core;
 
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
@@ -22,10 +22,6 @@ public class StreakDisplayConfig extends AddonConfig {
   @SliderSetting(min = 5, max = 10)
   private final ConfigProperty<Integer> size = new ConfigProperty<>(7);
 
-  @SpriteSlot(x = 2)
-  @SwitchSetting
-  private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(true);
-
   @SettingSection("streaks")
   @SpriteSlot(x = 3)
   @SwitchSetting
@@ -40,7 +36,7 @@ public class StreakDisplayConfig extends AddonConfig {
   @MethodOrder(after = "hideHiddenStreaks")
   @ButtonSetting
   public void clearCache() {
-    StreakDisplayAddon.references().streakApiController().clear();
+    StreakDisplayAddon.cacheController().clear();
   }
 
   @Override
@@ -50,10 +46,6 @@ public class StreakDisplayConfig extends AddonConfig {
 
   public ConfigProperty<Integer> size() {
     return this.size;
-  }
-
-  public ConfigProperty<Boolean> showBackground() {
-    return this.showBackground;
   }
 
   public ConfigProperty<Boolean> hideZeroStreaks() {

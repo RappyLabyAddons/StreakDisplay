@@ -4,13 +4,15 @@ import java.util.UUID;
 import net.labymod.api.reference.annotation.Referenceable;
 
 @Referenceable
-public interface StreakApiController {
+public interface StreakCacheController {
 
   void resolve(UUID uuid);
 
   boolean has(UUID uuid);
 
   Integer get(UUID uuid);
+
+  void remove(UUID uuid);
 
   void clear();
 

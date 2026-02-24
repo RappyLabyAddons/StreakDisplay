@@ -1,8 +1,8 @@
-package com.rappytv.streakdisplay.controller;
+package com.rappytv.streakdisplay.core.controller;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.rappytv.streakdisplay.api.StreakApiController;
+import com.rappytv.streakdisplay.api.StreakCacheController;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,8 +13,8 @@ import net.labymod.api.models.Implements;
 import net.labymod.api.util.io.web.request.Request;
 
 @Singleton
-@Implements(StreakApiController.class)
-public class DefaultStreakApiController implements StreakApiController {
+@Implements(StreakCacheController.class)
+public class DefaultStreakCacheController implements StreakCacheController {
 
   private static final String STREAK_ENDPOINT = "https://streaks.rappytv.com/streaks/%s";
   private final Map<UUID, Integer> cache = new HashMap<>();
@@ -61,6 +61,11 @@ public class DefaultStreakApiController implements StreakApiController {
   @Override
   public Integer get(UUID uuid) {
     return this.cache.get(uuid);
+  }
+
+  @Override
+  public void remove(UUID uuid) {
+    this.cache.remove(uuid);
   }
 
   @Override
