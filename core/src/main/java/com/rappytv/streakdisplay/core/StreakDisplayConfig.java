@@ -22,10 +22,6 @@ public class StreakDisplayConfig extends AddonConfig {
   @SliderSetting(min = 5, max = 10)
   private final ConfigProperty<Integer> size = new ConfigProperty<>(7);
 
-  @SpriteSlot(x = 2)
-  @SwitchSetting
-  private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(true);
-
   @SettingSection("streaks")
   @SpriteSlot(x = 3)
   @SwitchSetting
@@ -50,10 +46,6 @@ public class StreakDisplayConfig extends AddonConfig {
 
   public ConfigProperty<Integer> size() {
     return this.size;
-  }
-
-  public ConfigProperty<Boolean> showBackground() {
-    return this.showBackground;
   }
 
   public ConfigProperty<Boolean> hideZeroStreaks() {
