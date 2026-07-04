@@ -1,7 +1,7 @@
 rootProject.name = "streakdisplay"
 
 pluginManagement {
-    val labyGradlePluginVersion = "0.6.0"
+    val labyGradlePluginVersion = "0.8.2"
     buildscript {
         repositories {
             maven("https://dist.labymod.net/api/v1/maven/release/")
