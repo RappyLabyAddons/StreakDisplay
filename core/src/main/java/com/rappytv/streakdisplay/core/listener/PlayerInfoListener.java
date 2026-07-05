@@ -17,12 +17,8 @@ public class PlayerInfoListener {
   }
 
   @Subscribe
-  public void onPlayerRender(PlayerInfoAddEvent event) {
-    UUID uuid = event.playerInfo().profile().getUniqueId();
-
-    if (!this.controller.has(uuid)) {
-      this.controller.resolve(uuid);
-    }
+  public void onPlayerInfoAdd(PlayerInfoAddEvent event) {
+    this.controller.resolve(event.playerInfo().profile().getUniqueId());
   }
 
   @Subscribe

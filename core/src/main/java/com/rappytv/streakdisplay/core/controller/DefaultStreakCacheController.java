@@ -155,11 +155,6 @@ public class DefaultStreakCacheController implements StreakCacheController {
   }
 
   @Override
-  public boolean has(UUID uuid) {
-    return this.cache.containsKey(uuid);
-  }
-
-  @Override
   public StreakData get(UUID uuid) {
     StreakData value = this.cache.get(uuid);
     return value == null || value.isNull() ? null : value;
