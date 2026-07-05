@@ -4,9 +4,9 @@ import com.rappytv.streakdisplay.api.StreakCacheController;
 import com.rappytv.streakdisplay.core.StreakDisplayAddon;
 import java.util.UUID;
 import net.labymod.api.event.Subscribe;
+import net.labymod.api.event.client.network.playerinfo.PlayerInfoAddEvent;
 import net.labymod.api.event.client.network.playerinfo.PlayerInfoRemoveEvent;
 import net.labymod.api.event.client.network.server.ServerDisconnectEvent;
-import net.labymod.api.event.client.render.model.entity.player.PlayerModelRenderEvent;
 
 public class PlayerInfoListener {
 
@@ -17,8 +17,8 @@ public class PlayerInfoListener {
   }
 
   @Subscribe
-  public void onPlayerRender(PlayerModelRenderEvent event) {
-    UUID uuid = event.player().getUniqueId();
+  public void onPlayerRender(PlayerInfoAddEvent event) {
+    UUID uuid = event.playerInfo().profile().getUniqueId();
 
     if (!this.controller.has(uuid)) {
       this.controller.resolve(uuid);
