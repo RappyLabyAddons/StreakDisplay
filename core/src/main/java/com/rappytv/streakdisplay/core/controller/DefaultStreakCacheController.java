@@ -23,6 +23,7 @@ import net.labymod.api.util.concurrent.task.Task;
 import net.labymod.api.util.io.web.request.Request;
 import net.labymod.api.util.io.web.request.Request.Method;
 import net.labymod.api.util.logging.Logging;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Singleton
@@ -39,7 +40,7 @@ public class DefaultStreakCacheController implements StreakCacheController {
   private final Set<UUID> pendingQueue = ConcurrentHashMap.newKeySet();
 
   @Override
-  public void resolve(UUID uuid) {
+  public void resolve(@NotNull UUID uuid) {
     if (this.cache.containsKey(uuid) || !this.pendingQueue.add(uuid)) {
       return;
     }
@@ -155,13 +156,13 @@ public class DefaultStreakCacheController implements StreakCacheController {
   }
 
   @Override
-  public StreakData get(UUID uuid) {
+  public @NotNull StreakData get(UUID uuid) {
     StreakData value = this.cache.get(uuid);
-    return value == null || value.isNull() ? null : value;
+    return value == null || value.isNull() ? NULL_STREAK : value;
   }
 
   @Override
-  public void remove(UUID uuid) {
+  public void remove(@NotNull UUID uuid) {
     this.cache.remove(uuid);
   }
 
