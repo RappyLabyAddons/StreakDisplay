@@ -12,6 +12,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Singleton;
+import com.rappytv.streakdisplay.api.StreakData;
 import net.labymod.api.Laby;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.labyconnect.TokenStorage.Purpose;
@@ -32,8 +33,9 @@ public class DefaultStreakCacheController implements StreakCacheController {
   private static final String DEBOUNCE_KEY = "streakdisplay-request-streaks";
   private static final int MAX_BATCH_SIZE = 100;
   private static final Logging LOGGER = Logging.getLogger();
+  private static final StreakData NULL_STREAK = new StreakData(null);
 
-  private final Map<UUID, Integer> cache = new ConcurrentHashMap<>();
+  private final Map<UUID, StreakData> cache = new ConcurrentHashMap<>();
   private final Set<UUID> pendingQueue = ConcurrentHashMap.newKeySet();
 
   @Override
@@ -110,11 +112,19 @@ public class DefaultStreakCacheController implements StreakCacheController {
           int cached = 0;
           for (UUID uuid : uuids) {
             JsonObject entry = object.getAsJsonObject(uuid.toString());
-            if (entry == null || !entry.has("current") || !entry.get("current").isJsonPrimitive()) {
+            if (entry == null) {
               this.cacheFailure(uuid);
               continue;
             }
-            this.cacheStreak(uuid, entry.get("current").getAsInt());
+
+            if(entry.has("current") && entry.get("current").isJsonPrimitive()) {
+              this.cacheStreak(uuid, entry.get("current").getAsInt());
+            } else if(entry.has("hidden") && entry.get("hidden").isJsonPrimitive()) {
+              this.cacheStreak(uuid, -1);
+            } else {
+              this.cacheFailure(uuid);
+              return;
+            }
             cached++;
           }
           LOGGER.debug("Cached " + cached + " streaks.");
@@ -137,11 +147,11 @@ public class DefaultStreakCacheController implements StreakCacheController {
   }
 
   private void cacheStreak(UUID uuid, Integer value) {
-    this.cache.put(uuid, value);
+    this.cache.put(uuid, new StreakData(value));
   }
 
   private void cacheFailure(UUID uuid) {
-    this.cache.put(uuid, -1);
+    this.cache.put(uuid, NULL_STREAK);
   }
 
   @Override
@@ -150,9 +160,9 @@ public class DefaultStreakCacheController implements StreakCacheController {
   }
 
   @Override
-  public Integer get(UUID uuid) {
-    Integer value = this.cache.get(uuid);
-    return value == null || value == -1 ? null : value;
+  public StreakData get(UUID uuid) {
+    StreakData value = this.cache.get(uuid);
+    return value == null || value.isNull() ? null : value;
   }
 
   @Override

@@ -10,7 +10,7 @@ public interface StreakCacheController {
 
   boolean has(UUID uuid);
 
-  Integer get(UUID uuid);
+  StreakData get(UUID uuid);
 
   void remove(UUID uuid);
 
