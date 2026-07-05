@@ -34,7 +34,6 @@ public class DefaultStreakCacheController implements StreakCacheController {
   private static final String DEBOUNCE_KEY = "streakdisplay-request-streaks";
   private static final int MAX_BATCH_SIZE = 100;
   private static final Logging LOGGER = Logging.getLogger();
-  private static final StreakData NULL_STREAK = new StreakData(null);
 
   private final Map<UUID, StreakData> cache = new ConcurrentHashMap<>();
   private final Set<UUID> pendingQueue = ConcurrentHashMap.newKeySet();
@@ -152,13 +151,13 @@ public class DefaultStreakCacheController implements StreakCacheController {
   }
 
   private void cacheFailure(UUID uuid) {
-    this.cache.put(uuid, NULL_STREAK);
+    this.cache.put(uuid, StreakData.NULL_DATA);
   }
 
   @Override
   public @NotNull StreakData get(UUID uuid) {
     StreakData value = this.cache.get(uuid);
-    return value == null || value.isNull() ? NULL_STREAK : value;
+    return value != null ? value : StreakData.NULL_DATA;
   }
 
   @Override

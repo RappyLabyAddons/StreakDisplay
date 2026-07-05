@@ -5,6 +5,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class StreakData {
 
+  public static final StreakData NULL_DATA = new StreakData(null);
+
   private final int streak;
   private final State state;
 
@@ -25,10 +27,6 @@ public class StreakData {
   @NotNull
   public State getState() {
     return this.state;
-  }
-
-  public boolean isNull() {
-    return this.state == State.NULL;
   }
 
   public enum State {
