@@ -1,6 +1,7 @@
 package com.rappytv.streakdisplay.core.ui.snapshot;
 
 import com.rappytv.streakdisplay.api.StreakCacheController;
+import com.rappytv.streakdisplay.api.StreakData;
 import com.rappytv.streakdisplay.core.StreakDisplayAddon;
 import com.rappytv.streakdisplay.core.StreakDisplayConfig;
 import net.labymod.api.client.component.Component;
@@ -25,14 +26,14 @@ public class StreakUserSnapshot extends AbstractLabySnapshot {
     super(extras);
     StreakDisplayConfig config = addon.configuration();
     StreakCacheController controller = StreakDisplayAddon.cacheController();
-    Integer streak = controller.get(player.getUniqueId());
+    StreakData streak = controller.get(player.getUniqueId());
 
     this.enabled = config.enabled().get();
-    this.streakComponent = switch (streak) {
-      case null -> null;
-      case -1 -> config.hideHiddenStreaks().get() ? null : HIDDEN_COMPONENT;
-      case 0 -> config.hideZeroStreaks().get() ? null : ZERO_COMPONENT;
-      default -> Component.text(streak.toString());
+    this.streakComponent = switch (streak.getState()) {
+      case NULL -> null;
+      case HIDDEN -> config.hideHiddenStreaks().get() ? null : HIDDEN_COMPONENT;
+      case ZERO -> config.hideZeroStreaks().get() ? null : ZERO_COMPONENT;
+      case PRESENT -> Component.text(streak.getStreak());
     };
   }
 
