@@ -6,7 +6,7 @@ plugins {
 val versions = providers.gradleProperty("net.labymod.minecraft-versions").get().split(";")
 
 group = "org.example"
-version = "1.1.0"
+version = "1.1.1"
 
 labyMod {
     defaultPackageName = "com.rappytv.streakdisplay"
