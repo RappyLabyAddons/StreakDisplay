@@ -27,11 +27,6 @@
       "hideHiddenStreaks": {
         "name": "Hide private streaks",
         "description": "If disabled, it will indicate that the streak is hidden instead of removing it."
-      },
-      "clearCache": {
-        "name": "Refresh local streak data",
-        "text": "Refresh",
-        "description": "This only updates streaks from the API and does not request new data from the laby.net."
       }
     },
     "nametag": {

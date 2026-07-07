@@ -27,11 +27,6 @@
       "hideHiddenStreaks": {
         "name": "Versteckte Streaks ausblenden",
         "description": "Wenn diese Option deaktiviert ist, wird angezeigt, dass die Streak versteckt ist, anstatt sie zu entfernen."
-      },
-      "clearCache": {
-        "name": "Lokale Streakdaten erneuern",
-        "text": "Erneuern",
-        "description": "Diese Option aktualisiert nur die Streak-Daten von der API und fordert keine neuen Daten von laby.net an."
       }
     },
     "nametag": {
